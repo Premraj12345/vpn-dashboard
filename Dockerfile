@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-dev \
-    python3-venv \  # Install the virtualenv package
+    python3-venv \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a virtual environment for Python packages
