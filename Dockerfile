@@ -37,11 +37,11 @@ WORKDIR /app
 # Expose required ports for VPN, mitmproxy, and Flask
 EXPOSE 5000 8080 1701/udp 4500/udp 500/udp
 
-# Start the VPN, mitmproxy, and Flask app
+# Start the services in the background and the Flask app
 CMD bash -c "
     # Start the VPN services (IPSec and L2TP)
-    service strongswan start && \
-    service xl2tpd start && \
+    strongswan start & \
+    xl2tpd start & \
     
     # Start mitmproxy in transparent mode to capture traffic
     mitmproxy --mode transparent --listen-port 8080 & \
