@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // Request logs
+        socket.emit('get_logs', {device_id: 'device1'});
+
+        // Listen for new logs
+        socket.on('new_log', function(log) {
+            let logContainer = document.getElementById('logContainer');
+            let newLog = document.createElement('div');
+            newLog.textContent = log;
+            logContainer.appendChild(newLog);
+        });
+    </script>
+</head>
+<body>
+    <h1>VPN Dashboard</h1>
+    <button onclick="window.location.href='/download_cert'">Download VPN Certificate</button>
+
+    <h2>Devices Using VPN</h2>
+    <ul id="deviceList">
+        <li>Device 1</li>
+        <li>Device 2</li>
+        <!-- Dynamically add connected devices here -->
+    </ul>
+
+    <h2>Request Logs</h2>
+    <div id="logContainer">
+        <!-- Real-time logs will appear here -->
+    </div>
+</body>
+</html>
