@@ -11,6 +11,6 @@ xl2tpd start &
 echo "Starting mitmproxy..."
 mitmproxy --mode transparent --listen-port 8080 &
 
-# Start the Flask app for the dashboard
+# Start the Flask app for the dashboard using the virtual environment's Python
 echo "Starting Flask app..."
-python3 /app/app.py
+/env/bin/python3 /app/app.py
