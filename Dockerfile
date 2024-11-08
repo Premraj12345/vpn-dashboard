@@ -12,10 +12,14 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-dev \
+    python3-venv \  # Install the virtualenv package
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies (Flask and SocketIO)
-RUN pip3 install Flask Flask-SocketIO
+# Create a virtual environment for Python packages
+RUN python3 -m venv /env
+
+# Install Python dependencies (Flask and SocketIO) inside the virtual environment
+RUN /env/bin/pip install Flask Flask-SocketIO
 
 # Create directories for app, certs, vpn, mitmproxy, and scripts
 RUN mkdir -p /app /vpn /mitmproxy /certs /etc/mitmproxy /scripts
